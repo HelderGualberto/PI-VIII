@@ -1,10 +1,12 @@
 #define F_CPU 16000000UL
-#define BAUD 230400
+#define BAUD 115200
 
 #include <util/setbaud.h>
 #include<avr/io.h>
 #include <avr/pgmspace.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
+
 typedef union _bit16{
     uint16_t __2bytes;  // or use int16_t to be more specific
     //   vs.z
@@ -67,39 +69,39 @@ ISR(ADC_vect)
   //ADMUX |= (0 << MUX2)|(1 << MUX1)|(1 << MUX0);
 //  ADMUX |= ((b1 & ( 1 << 1 )) >> 1 ) << MUX0; //  1-th bit of n
   //ADMUX ^= (MUX0 ^MUX1 ) << MUX1;
-  debug_print("ADMUX ", ADMUX);
+  //debug_print("ADMUX ", ADMUX);
 
   ADCSRA |= 1 << ADSC; // restart conversion
 }
 int main(void)
 {
-  Serial.begin(BAUD);
+  //Serial.begin(BAUD);
   adc_init();
   //ADCSRA |= (1 << ADIE); // Enable interrupts 
   //ADCSRA |= 1 << ADSC; //START CONVERSION
   
   //sei();
-  //uart_init();
+  uart_init();
   while (1){
     //send_str("teste");
     //Serial.println("teste");
     bit16 ad0, ad1, ad2, ad3;
     ad0.__2bytes =  adc_read(0);
-    //send_bit16(ad0);
-    Serial.print(ad0.__2bytes);
+    send_bit16(ad0);
+    //Serial.print(ad0.__2bytes);
     ad1.__2bytes = adc_read(1);
-    ad1.__1byte.msb =  ad1.__1byte.msb | 0b00000111;
-    //send_bit16(ad1);
-    Serial.print(ad1.__2bytes);
+    ad1.__1byte.msb =  ad1.__1byte.msb | 0b00000100;
+    send_bit16(ad1);
+    //Serial.print(ad1.__2bytes);
     ad2.__2bytes = adc_read(2);
-    ad2.__1byte.msb =  ad2.__1byte.msb | 0b00001011;
-    //send_bit16(ad2);
-    Serial.print(ad2.__2bytes);
+    ad2.__1byte.msb =  ad2.__1byte.msb | 0b00001000;
+    send_bit16(ad2);
+    //Serial.print(ad2.__2bytes);
     ad3.__2bytes = adc_read(3);
-    ad3.__1byte.msb =  ad3.__1byte.msb | 0b00001111;
-    //send_bit16(ad3);
-    Serial.print(ad3.__2bytes);
-
+    ad3.__1byte.msb =  ad3.__1byte.msb | 0b00001100;
+    send_bit16(ad3);
+    //Serial.print(ad3.__2bytes);
+    _delay_ms(100);
   }
 
 }
