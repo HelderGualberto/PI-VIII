@@ -26,19 +26,19 @@ void loop() {
   //Preamble bytes
   str[0] = 0b00010000;
   str[1] = 0b00100000; 
-  str[2] = 0b01000000; 
-  str[3] = 0b10000000;
-  str[4] = a0; //lsb
-  str[5] = a0 >> 8; //msb
-  str[6] = a1; //lsb
-  str[7] = a1 >> 8; //msb
-  str[8] = a2; //lsb
-  str[9] = a2 >> 8; //msb
-  str[10] = a3; //lsb
-  str[11] = a3 >> 8; //msb
+  str[2] = a0; //lsb
+  str[3] = a0 >> 8; //msb
+  str[4] = a1; //lsb
+  str[5] = a1 >> 8; //msb
+  str[6] = a2; //lsb
+  str[7] = a2 >> 8; //msb
+  str[8] = a3; //lsb
+  str[9] = a3 >> 8; //msb
+  str[10] = 0b01000000; 
+  str[11] = 0b10000000;
 
   Serial.write(str,12);
-  delay(100);
+  delay(10);
 /*
   str[0] = 125; //lsb
   str[1] = 1; //msb
