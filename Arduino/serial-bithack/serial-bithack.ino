@@ -7,7 +7,7 @@ uint16_t a3;
 byte str[12];
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200);
+  Serial.begin(19200);
   delay(2000);
 }
 
@@ -39,41 +39,5 @@ void loop() {
 
   Serial.write(str,12);
   delay(10);
-/*
-  str[0] = 125; //lsb
-  str[1] = 1; //msb
-  str[2] = 123; //lsb
-  str[3] = 2; //msb
-  str[4] = 124; //lsb
-  str[5] = 3; //msb
-  str[6] = 127; //lsb
-  str[7] = 0; //msb
-  */
 
-/*
-  delayMicroseconds(125);
-  str = a0; //lsb
-  Serial.write(&str,1);
-  delayMicroseconds(125);
-  str = a0 >> 8; //msb 
-  Serial.write(&str,1);
-  delayMicroseconds(125);
-  str =a1; //lsb
-  Serial.write(&str,1);
-  delayMicroseconds(125);
-  str = a1 >> 8; //msb
-  Serial.write(&str,1);
-  delayMicroseconds(125);
-  str = a2; //lsb
-  Serial.write(&str,1);
-  delayMicroseconds(125);
-  str = a2 >> 8; //msb
-  Serial.write(&str,1);
-  delayMicroseconds(125);
-  str = a3; //lsb
-  Serial.write(&str,1);
-  delayMicroseconds(125);
-  str = a3 >> 8; //msb
-  Serial.write(&str,1);
-  delayMicroseconds(125);*/
   }
