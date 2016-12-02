@@ -38,6 +38,6 @@ void loop() {
   str[11] = 0b10000000;
 
   Serial.write(str,12);
-  delay(10);
+  delay(9);
 
   }
